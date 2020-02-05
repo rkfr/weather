@@ -23,7 +23,7 @@ export const usePosition = () => {
       return;
     }
 
-    let watcher = geolocation.watchPosition(onChange, onError);
+    const watcher = geolocation.watchPosition(onChange, onError);
 
     return () => geolocation.clearWatch(watcher);
   }, []);

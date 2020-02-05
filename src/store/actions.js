@@ -1,6 +1,7 @@
 const ACTION_TYPES = {
   SET_CURRENT_WEATHER: 'SET_CURRENT_WEATHER',
-  SET_LOCATION: 'SET_LOCATION',
+  SET_CITY_QUERY: 'SET_CITY_QUERY',
+  SET_COORDINATES: 'SET_COORDINATES',
 };
 
 export const setCurrentWeather = (currentWeather) => ({
@@ -8,9 +9,15 @@ export const setCurrentWeather = (currentWeather) => ({
   currentWeather,
 });
 
-export const setLocation = (location) => ({
-  type: ACTION_TYPES.SET_LOCATION,
-  location,
+export const setCityQuery = (cityQuery) => ({
+  type: ACTION_TYPES.SET_CITY_QUERY,
+  cityQuery,
+});
+
+export const setCoordinates = (lat, lon) => ({
+  type: ACTION_TYPES.SET_COORDINATES,
+  lat,
+  lon,
 });
 
 export default ACTION_TYPES;

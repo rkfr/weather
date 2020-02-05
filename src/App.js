@@ -1,19 +1,12 @@
 import React, { Component } from 'react';
-import { loadCurrentWeather } from './api';
+// import { usePosition } from './hooks/usePosition';
 
-class App extends Component {
-  componentDidMount() {
-    loadCurrentWeather('london')
-      .then((data) => {
-        console.log(data);
-      });
-  }
+const App = () => {
+  // const { latitude, longitude, error } = usePosition();
 
-  render() {
-    return (
-      <div>Weather App</div>
-    );
-  }
-}
+  return (
+    <div>Weather App</div>
+  );
+};
 
 export default App;

@@ -1,0 +1,5 @@
+const ACTION_TYPES = {
+  SET_CURRENT_WEATHER: 'SET_CURRENT_WEATHER',
+};
+
+export default ACTION_TYPES;

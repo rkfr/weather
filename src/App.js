@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { loadCurrentWeather } from './api';
 
-const App = () => (
-  <div>
-    <h1>Weather App</h1>
-  </div>
-);
+class App extends Component {
+  componentDidMount() {
+    loadCurrentWeather('london')
+      .then((data) => {
+        console.log(data);
+      });
+  }
+
+  render() {
+    return (
+      <div>Weather App</div>
+    );
+  }
+}
 
 export default App;

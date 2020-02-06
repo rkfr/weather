@@ -26,6 +26,7 @@ module.exports = {
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "import/prefer-default-export": 0,
     "react/state-in-constructor": [0],
-    "jsx-a11y/anchor-is-valid": [0]
+    "jsx-a11y/anchor-is-valid": [0],
+    "jsx-a11y/label-has-associated-control": [0],
   },
 };

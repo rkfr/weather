@@ -7,7 +7,9 @@ import './Input.scss';
 export const Input = ({
   value,
   onChange,
+  onSubmit,
   defaultInputVisibility,
+  className,
 }) => {
   const [isFocused, setFocus] = useState(false);
   const [isinputVisible, setInputVisibility] = useState(false);
@@ -21,6 +23,15 @@ export const Input = ({
 
   const handleinputVisibility = () => setInputVisibility(true);
 
+  const handleClick = () => {
+    onSubmit();
+    handleinputVisibility();
+  };
+
+  const containerClass = classNames('control', {
+    [className]: className,
+  });
+
   const labelClass = classNames('control__label', {
     'control__label--focused': isFocused || value,
   });
@@ -33,12 +44,13 @@ export const Input = ({
     'control__input--focused': isFocused,
   });
 
+
   return (
-    <label className="control">
+    <label className={containerClass}>
       <button
         type="button"
         className="control__button draw"
-        onClick={handleinputVisibility}
+        onClick={handleClick}
       >
         <img
           src="./images/search.svg"
@@ -74,10 +86,12 @@ export const Input = ({
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string,
+  className: PropTypes.string,
   defaultInputVisibility: PropTypes.bool,
 };
 
 Input.defaultProps = {
   value: '',
+  className: '',
   defaultInputVisibility: true,
 };

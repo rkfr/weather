@@ -1,7 +1,8 @@
 const ACTION_TYPES = {
   SET_CURRENT_WEATHER: 'SET_CURRENT_WEATHER',
   SET_CITY_QUERY: 'SET_CITY_QUERY',
-  SET_COORDINATES: 'SET_COORDINATES',
+  START_LOADING: 'START_LOADING',
+  FINISH_LOADING: 'FINISH_LOADING',
 };
 
 export const setCurrentWeather = (currentWeather) => ({
@@ -14,10 +15,12 @@ export const setCityQuery = (cityQuery) => ({
   cityQuery,
 });
 
-export const setCoordinates = (lat, lon) => ({
-  type: ACTION_TYPES.SET_COORDINATES,
-  lat,
-  lon,
+export const startLoading = () => ({
+  type: ACTION_TYPES.START_LOADING,
+});
+
+export const finishLoading = () => ({
+  type: ACTION_TYPES.FINISH_LOADING,
 });
 
 export default ACTION_TYPES;

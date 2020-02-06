@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
+import isLoading from './reducers/loading';
 import currentWeather from './reducers/currentWeather';
 import cityQuery from './reducers/cityQuery';
-import coordinates from './reducers/coordinates';
 
 const rootReducer = combineReducers({
+  isLoading,
   currentWeather,
-  coordinates,
   cityQuery,
 });
 

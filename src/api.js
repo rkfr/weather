@@ -10,3 +10,8 @@ export const loadCurrentWeatherByCoords = (lat, lon) => (
   fetch(`${URL}?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
     .then((res) => res.json())
 );
+
+export const getLocation = () => new Promise((resolve, reject) => {
+  navigator.geolocation.getCurrentPosition(resolve, reject);
+})
+  .then(({ coords }) => coords);

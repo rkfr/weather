@@ -1,0 +1,54 @@
+@import "../../styles/utils.scss";
+
+.control {
+  height: 80px;
+  display: flex;
+  position: relative;
+  padding-top: 30px;
+
+  &__label {
+    position: absolute;
+    transform: translate(50%, 14px);
+    white-space: nowrap;
+    color: $color-grey;
+    transition: all 200ms;
+
+    &--focused {
+      transform: translate(0, -26px);
+      font-size: .9rem;
+    }
+  }
+
+  &__input-wrapper {
+    transform: scaleX(0);
+    transition: transform 1s;
+    order: 1;
+
+    &--visible {
+      transform: scaleX(1);
+    }
+  }
+
+  &__input {
+    position: relative;
+    padding: 12px 40px;
+    z-index: 1;
+    border: none;
+    border-bottom: 1px solid #808e95;
+    transition: transform 400ms;
+  }
+
+  &__button {
+    order: 2;
+    position: relative;
+    width: 50px;
+    cursor: pointer;
+  }
+
+  &__img {
+    position: absolute;
+    top: 50%;
+    bottom: 50%;
+    transform: translate(-50%, -50%);
+  }
+}

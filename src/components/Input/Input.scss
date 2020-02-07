@@ -3,8 +3,14 @@
 .control {
   height: 80px;
   display: flex;
+  align-items: center;
   position: relative;
   padding-top: 30px;
+
+  &__caption {
+    position: absolute;
+    right: 60px;
+  }
 
   &__label {
     position: absolute;
@@ -34,7 +40,7 @@
     padding: 12px 40px;
     z-index: 1;
     border: none;
-    border-bottom: 1px solid #808e95;
+    border-bottom: 1px solid $color-dark-grey;
     transition: transform 400ms;
   }
 
@@ -50,5 +56,54 @@
     top: 50%;
     bottom: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  &__search-button {
+    padding: 12px 10px;
+
+    // color: #FFF;
+    transition: all 0.5s;
+    position: relative;
+
+    margin-left: 4px;
+    border: 1px solid transparent;
+    
+    cursor: pointer;
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      background-color: rgba(255,255,255,0.1);
+      transition: all 0.3s;
+    }
+
+    &:hover::before {
+        opacity: 0 ;
+        transform: scale(0.5,0.5);
+    }
+
+    &::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0;
+        transition: all 0.3s;
+        border: 1px solid $color-dark-grey;
+        transform: scale(1.2,1.2);
+    }
+
+    &:hover::after {
+        opacity: 1;
+        transform: scale(1,1);
+    }
   }
 }

@@ -6,6 +6,7 @@ import './Input.scss';
 
 export const Input = ({
   value,
+  caption,
   onChange,
   onSubmit,
   defaultInputVisibility,
@@ -22,11 +23,6 @@ export const Input = ({
   const handleBlur = () => setFocus(false);
 
   const handleinputVisibility = () => setInputVisibility(true);
-
-  const handleClick = () => {
-    onSubmit();
-    handleinputVisibility();
-  };
 
   const containerClass = classNames('control', {
     [className]: className,
@@ -46,19 +42,23 @@ export const Input = ({
 
 
   return (
-    <label className={containerClass}>
-      <button
-        type="button"
-        className="control__button draw"
-        onClick={handleClick}
-      >
-        <img
-          src="./images/search.svg"
-          alt="Search icon"
-          className="control__img"
-        />
-      </button>
-
+    <div className={containerClass}>
+      {!isinputVisible && !defaultInputVisibility && (
+        <>
+          <p className="control__caption">{caption}</p>
+          <button
+            type="button"
+            className="control__button draw"
+            onClick={handleinputVisibility}
+          >
+            <img
+              src="./images/search.svg"
+              alt="Search icon"
+              className="control__img"
+            />
+          </button>
+        </>
+      )}
 
       <div
         className={inputWrapperClass}
@@ -67,31 +67,39 @@ export const Input = ({
       >
 
         <p className={labelClass}>Choose city...</p>
-        <input
-          type="text"
-          name="name"
-          value={value}
-          ref={inputRef}
-          onChange={onChange}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          className={inputClass}
-        />
-
+        <form onSubmit={onSubmit}>
+          <input
+            type="text"
+            name="name"
+            value={value}
+            ref={inputRef}
+            onChange={onChange}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            className={inputClass}
+          />
+          <button type="submit" className="control__search-button">
+            Search
+          </button>
+        </form>
       </div>
-    </label>
+    </div>
   );
 };
 
 Input.propTypes = {
   onChange: PropTypes.func.isRequired,
+  caption: PropTypes.string,
   value: PropTypes.string,
   className: PropTypes.string,
   defaultInputVisibility: PropTypes.bool,
+  onSubmit: PropTypes.func,
 };
 
 Input.defaultProps = {
+  caption: '',
   value: '',
   className: '',
   defaultInputVisibility: true,
+  onSubmit: () => {},
 };

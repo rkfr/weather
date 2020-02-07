@@ -3,10 +3,7 @@ import ACTION_TYPES from '../actions';
 const currentWeather = (state = null, action) => {
   switch (action.type) {
     case ACTION_TYPES.SET_CURRENT_WEATHER: {
-      return {
-        ...state,
-        currentWeather: action.currentWeather,
-      };
+      return action.currentWeather;
     }
     default: {
       return state;

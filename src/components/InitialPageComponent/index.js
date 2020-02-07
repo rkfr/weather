@@ -11,6 +11,7 @@ import {
 const mapStateToProps = (state) => ({
   cityQuery: state.cityQuery,
   isLoading: state.isLoading,
+  weather: state.currentWeather,
 });
 
 const mapDispatchToProps = (dispatch) => ({

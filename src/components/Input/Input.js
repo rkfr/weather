@@ -70,7 +70,7 @@ export const Input = ({
       >
 
         <p className={labelClass}>Choose city...</p>
-        <form onSubmit={onSubmit}>
+        <form onSubmit={onSubmit} className="control__form">
           <input
             type="text"
             name="name"

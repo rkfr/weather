@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import './InitialPageComponent.scss';
 
@@ -12,6 +13,7 @@ import {
 
 const InitialPageComponent = (props) => {
   const {
+    weather,
     isLoading,
     cityQuery,
     setCity,
@@ -27,8 +29,9 @@ const InitialPageComponent = (props) => {
         startLoading();
         return loadCurrentWeatherByCoords(latitude, longitude);
       })
-      .then(({ name }) => {
-        setCity({ target: { value: name } });
+      .then((weatherData) => {
+        setCity({ target: { value: weatherData.name } });
+        setWeather(weatherData);
         finishLoading();
       })
       .catch(({ message }) => {
@@ -43,7 +46,6 @@ const InitialPageComponent = (props) => {
     loadCurrentWeatherByCityName(cityQuery)
       .then(((weatherData) => {
         setWeather(weatherData);
-
         if (weatherData.cod === '404') {
           setError(weatherData.message);
         } else {
@@ -56,19 +58,30 @@ const InitialPageComponent = (props) => {
   };
 
   return (
-    <div className="search-page">
+    <div className="initial-page">
       {isLoading && (
         <Loader />
       )}
-      <Input
-        className="search-page__input"
-        caption="Click to find"
-        isError={!!errorMessage}
-        errorMessage={errorMessage}
-        value={cityQuery}
-        onChange={setCity}
-        onSubmit={loadWeather}
-      />
+
+      <div className="initial-page__input-wrapper">
+
+        <Input
+        // caption="Click to find"
+          isError={!!errorMessage}
+          errorMessage={errorMessage}
+          value={cityQuery}
+          onChange={setCity}
+          onSubmit={loadWeather}
+        />
+        {(weather && !errorMessage) && (
+        <div className="initial-page__location">
+          <span>Show weather forecast for </span>
+          <Link className="initial-page__link" to="/">{weather.name}</Link>
+        </div>
+        )}
+
+      </div>
+
     </div>
   );
 };
@@ -77,13 +90,16 @@ InitialPageComponent.propTypes = {
   setCity: PropTypes.func.isRequired,
   setWeather: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
-  cityQuery: PropTypes.string,
   startLoading: PropTypes.func.isRequired,
   finishLoading: PropTypes.func.isRequired,
+  cityQuery: PropTypes.string,
+  // eslint-disable-next-line react/forbid-prop-types
+  weather: PropTypes.object,
 };
 
 InitialPageComponent.defaultProps = {
   cityQuery: '',
+  weather: [],
 };
 
 export default InitialPageComponent;

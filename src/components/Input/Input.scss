@@ -2,14 +2,21 @@
 
 .control {
   height: 80px;
-  display: flex;
-  align-items: center;
   position: relative;
   padding-top: 30px;
 
   &__caption {
     position: absolute;
     right: 60px;
+  }
+
+  &__form {
+    display: flex;
+
+    @media (max-width: $break-point-phone) {
+      display: block;
+      width: 100%;
+    }
   }
 
   &__label {
@@ -45,6 +52,12 @@
     border-bottom: 1px solid $color-dark-grey;
     transition: transform 400ms;
 
+    @media (max-width: $break-point-phone) {
+      display: block;
+      width: 100%;
+      margin-bottom: 1.6rem;
+    }
+
     &--error {
       border-bottom-color: $color-error;
     }
@@ -75,6 +88,12 @@
     border: 1px solid transparent;
     
     cursor: pointer;
+
+    @media (max-width: $break-point-phone) {
+      display: block;
+      width: 100%;
+      margin: 0;
+    }
 
     &::before {
       content: '';

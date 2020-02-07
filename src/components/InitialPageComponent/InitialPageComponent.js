@@ -46,6 +46,8 @@ const InitialPageComponent = (props) => {
 
         if (weatherData.cod === '404') {
           setError(weatherData.message);
+        } else {
+          setError(null);
         }
 
         finishLoading();
@@ -60,14 +62,13 @@ const InitialPageComponent = (props) => {
       )}
       <Input
         className="search-page__input"
-        value={cityQuery}
         caption="Click to find"
+        isError={!!errorMessage}
+        errorMessage={errorMessage}
+        value={cityQuery}
         onChange={setCity}
         onSubmit={loadWeather}
       />
-      {errorMessage && (
-        <div>{errorMessage}</div>
-      )}
     </div>
   );
 };

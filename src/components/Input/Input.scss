@@ -16,7 +16,7 @@
     position: absolute;
     transform: translate(50%, 14px);
     white-space: nowrap;
-    color: $color-grey;
+    color: $color-dark-grey;
     transition: all 200ms;
 
     &--focused {
@@ -38,10 +38,16 @@
   &__input {
     position: relative;
     padding: 12px 40px;
+
+    color: #FFF;
     z-index: 1;
     border: none;
     border-bottom: 1px solid $color-dark-grey;
     transition: transform 400ms;
+
+    &--error {
+      border-bottom-color: $color-error;
+    }
   }
 
   &__button {
@@ -61,7 +67,7 @@
   &__search-button {
     padding: 12px 10px;
 
-    // color: #FFF;
+    color: #FFF;
     transition: all 0.5s;
     position: relative;
 
@@ -104,6 +110,23 @@
     &:hover::after {
         opacity: 1;
         transform: scale(1,1);
+    }
+  }
+
+  &__error {
+    position: absolute;
+    transform: translate(0, 26px);
+
+    padding: 3px 15px;
+
+    color: $color-error;
+    
+    &::after {
+      content: "\002A";
+    }
+
+    &::first-letter {
+      text-transform: uppercase;
     }
   }
 }

@@ -11,6 +11,8 @@ export const Input = ({
   onSubmit,
   defaultInputVisibility,
   className,
+  isError,
+  errorMessage,
 }) => {
   const [isFocused, setFocus] = useState(false);
   const [isinputVisible, setInputVisibility] = useState(false);
@@ -38,6 +40,7 @@ export const Input = ({
 
   const inputClass = classNames('control__input', {
     'control__input--focused': isFocused,
+    'control__input--error': isError,
   });
 
 
@@ -82,6 +85,9 @@ export const Input = ({
             Search
           </button>
         </form>
+        {isError && (
+        <p className="control__error">{errorMessage}</p>
+        )}
       </div>
     </div>
   );
@@ -92,7 +98,9 @@ Input.propTypes = {
   caption: PropTypes.string,
   value: PropTypes.string,
   className: PropTypes.string,
+  errorMessage: PropTypes.string,
   defaultInputVisibility: PropTypes.bool,
+  isError: PropTypes.bool,
   onSubmit: PropTypes.func,
 };
 
@@ -100,6 +108,8 @@ Input.defaultProps = {
   caption: '',
   value: '',
   className: '',
+  errorMessage: '',
   defaultInputVisibility: true,
+  isError: false,
   onSubmit: () => {},
 };

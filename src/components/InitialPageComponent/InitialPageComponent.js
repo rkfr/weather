@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './InitialPageComponent.scss';
 
 import { Input } from '../Input';
+import { Loader } from '../Loader';
 import {
   getLocation,
   loadCurrentWeatherByCoords,
@@ -18,7 +19,7 @@ const InitialPageComponent = (props) => {
     startLoading,
     finishLoading,
   } = props;
-  const [errorGeo, setErrorGeo] = useState(null);
+  const [errorMessage, setError] = useState(null);
 
   useEffect(() => {
     getLocation()
@@ -31,38 +32,41 @@ const InitialPageComponent = (props) => {
         finishLoading();
       })
       .catch(({ message }) => {
-        setErrorGeo(message);
+        setError(message);
       });
   }, []);
 
-  const loadWeather = () => {
+  const loadWeather = (event) => {
+    event.preventDefault();
+    startLoading();
+
     loadCurrentWeatherByCityName(cityQuery)
-      .then(setWeather)
-      .catch(() => setErrorGeo('invalid city name'));
+      .then(((weatherData) => {
+        setWeather(weatherData);
+
+        if (weatherData.cod === '404') {
+          setError(weatherData.message);
+        }
+
+        finishLoading();
+      }))
+      .catch(() => setError('Error'));
   };
 
   return (
     <div className="search-page">
+      {isLoading && (
+        <Loader />
+      )}
       <Input
         className="search-page__input"
+        value={cityQuery}
+        caption="Click to find"
         onChange={setCity}
         onSubmit={loadWeather}
-        value={cityQuery}
-        defaultInputVisibility={false}
       />
-      {errorGeo && (
-        <>
-          <span
-            style={{
-              position: 'absolute',
-              top: '51%',
-              left: '48%',
-              transform: 'translate(-50%, -50%)',
-            }}
-          >
-            {errorGeo}
-          </span>
-        </>
+      {errorMessage && (
+        <div>{errorMessage}</div>
       )}
     </div>
   );

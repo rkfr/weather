@@ -1,3 +1,5 @@
+@import './utils.scss';
+
 *,
 ::after,
 ::before {
@@ -28,4 +30,36 @@ input {
   border: none;
   background: transparent;
   outline: none;
+}
+
+.content {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+
+  @media (max-width: $break-point-phone-lg) {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
+  @media (min-width: $break-point-phone-lg) {
+    max-width: 540px;
+  }
+
+  @media (min-width: $break-point-tablet-sm) {
+    max-width: 720px;
+  }
+
+  @media (min-width: $break-point-tablet) {
+    max-width: 960px;
+  }
+
+  @media (min-width: $break-point-desktop) {
+    max-width: 1140px;
+  }
+
+  @media (min-width: $break-point-desktop-lg) {
+    max-width: 1400px;
+  }
+
 }

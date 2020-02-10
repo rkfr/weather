@@ -57,30 +57,34 @@ const InitialPageComponent = (props) => {
       .catch(() => setError('Error'));
   };
 
+
   return (
     <div className="initial-page">
       {isLoading && (
         <Loader />
       )}
 
-      <div className="initial-page__input-wrapper">
+      <div className="content">
+        <div className="initial-page__input-wrapper">
 
-        <Input
-        // caption="Click to find"
-          isError={!!errorMessage}
-          errorMessage={errorMessage}
-          value={cityQuery}
-          onChange={setCity}
-          onSubmit={loadWeather}
-        />
-        {(weather && !errorMessage) && (
-        <div className="initial-page__location">
-          <span>Show weather forecast for </span>
-          <Link className="initial-page__link" to="/">{weather.name}</Link>
+          <Input
+// caption="Click to find"
+            isError={!!errorMessage}
+            errorMessage={errorMessage}
+            value={cityQuery}
+            onChange={setCity}
+            onSubmit={loadWeather}
+          />
+          {(weather && !errorMessage && cityQuery) && (
+          <div className="initial-page__location">
+            <span>Show weather forecast for </span>
+            <Link className="initial-page__link" to={`/weather/${weather.name}`}>{weather.name}</Link>
+          </div>
+          )}
+
         </div>
-        )}
-
       </div>
+
 
     </div>
   );

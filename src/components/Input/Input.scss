@@ -13,7 +13,7 @@
   &__form {
     display: flex;
 
-    @media (max-width: $break-point-phone) {
+    @media (max-width: $break-point-phone-lg) {
       display: block;
       width: 100%;
     }
@@ -52,7 +52,8 @@
     border-bottom: 1px solid $color-dark-grey;
     transition: transform 400ms;
 
-    @media (max-width: $break-point-phone) {
+
+    @media (max-width: $break-point-phone-lg) {
       display: block;
       width: 100%;
       margin-bottom: 1.6rem;
@@ -87,9 +88,11 @@
     margin-left: 4px;
     border: 1px solid transparent;
     
+    overflow: hidden;
     cursor: pointer;
 
-    @media (max-width: $break-point-phone) {
+    @media (max-width: $break-point-phone-lg) {
+      padding: 12px 0;
       display: block;
       width: 100%;
       margin: 0;

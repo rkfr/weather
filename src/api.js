@@ -1,4 +1,4 @@
-const API_KEY = '533a08608e92af63d444a6312e4f704d';
+const API_KEY = '158d21ae5337a203dfccb519d821591d';
 const URL = 'https://api.openweathermap.org/data/2.5/weather';
 
 export const loadCurrentWeatherByCityName = (location) => (

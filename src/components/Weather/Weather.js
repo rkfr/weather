@@ -86,6 +86,7 @@ const Weather = (props) => {
             <div className="current-weather__details-item details-item">
               <p className="details-item__title">
                 {/* {`${rainPercent} %`} */}
+                30%
               </p>
               <p className="details-item__text">
                 Rain

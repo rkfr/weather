@@ -1,31 +1,21 @@
-import React from 'react';
+
 import { connect } from 'react-redux';
+import { getCurrentWeather, getLoading, getError } from '../../store/selectors';
+
 import InitialPageComponent from './InitialPageComponent';
-import {
-  setCityQuery,
-  startLoading,
-  finishLoading,
-  setCurrentWeather,
-} from '../../store/actions';
+import { loadCurrentWeather } from '../../store/actions';
 
 const mapStateToProps = (state) => ({
-  cityQuery: state.cityQuery,
-  isLoading: state.isLoading,
-  weather: state.currentWeather,
+  weatherData: getCurrentWeather(state),
+  isLoading: getLoading(state),
+  error: getError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  setCity: ({ target }) => dispatch(setCityQuery(target.value)),
-  setWeather: (weatherData) => dispatch(setCurrentWeather(weatherData)),
-  startLoading: () => dispatch(startLoading()),
-  finishLoading: () => dispatch(finishLoading()),
+  loadWeather: (weather) => dispatch(loadCurrentWeather(weather)),
 });
 
-const ConnectedInitialPage = React.memo(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(InitialPageComponent),
-);
-
-export { ConnectedInitialPage as InitialPageComponent };
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(InitialPageComponent);

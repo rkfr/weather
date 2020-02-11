@@ -1,26 +1,41 @@
-const ACTION_TYPES = {
-  SET_CURRENT_WEATHER: 'SET_CURRENT_WEATHER',
-  SET_CITY_QUERY: 'SET_CITY_QUERY',
+import { loadCurrentWeatherByCityName } from '../api';
+
+export const ACTION_TYPES = {
+  SAVE_CURRENT_WEATHER: 'SAVE_CURRENT_WEATHER',
+  SET_WEATHER_LOADING_ERROR: 'SET_WEATHER_LOADING_ERROR',
   START_LOADING: 'START_LOADING',
-  FINISH_LOADING: 'FINISH_LOADING',
+  STOP_LOADING: 'STOP_LOADING',
 };
 
-export const setCurrentWeather = (currentWeather) => ({
-  type: ACTION_TYPES.SET_CURRENT_WEATHER,
-  currentWeather,
+const saveCurrentWeather = (weather) => ({
+  type: ACTION_TYPES.SAVE_CURRENT_WEATHER,
+  weather,
 });
 
-export const setCityQuery = (cityQuery) => ({
-  type: ACTION_TYPES.SET_CITY_QUERY,
-  cityQuery,
+const setWeatherLoadingError = (error) => ({
+  type: ACTION_TYPES.SET_WEATHER_LOADING_ERROR,
+  error,
 });
 
-export const startLoading = () => ({
+const startLoading = () => ({
   type: ACTION_TYPES.START_LOADING,
 });
 
-export const finishLoading = () => ({
-  type: ACTION_TYPES.FINISH_LOADING,
+const stopLoading = () => ({
+  type: ACTION_TYPES.STOP_LOADING,
 });
 
-export default ACTION_TYPES;
+export const loadCurrentWeather = (locationName) => (dispatch) => {
+  dispatch(startLoading());
+
+  loadCurrentWeatherByCityName(locationName)
+    .then((weatherData) => {
+      if (!weatherData.cod) {
+        dispatch(saveCurrentWeather(weatherData));
+      } else {
+        dispatch(setWeatherLoadingError(weatherData.message));
+      }
+    })
+    .catch(() => dispatch(setWeatherLoadingError('Error something went wrong')))
+    .finally(() => dispatch(stopLoading()));
+};

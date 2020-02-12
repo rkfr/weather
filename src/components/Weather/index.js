@@ -1,4 +1,10 @@
 
+import { connect } from 'react-redux';
 import Weather from './Weather';
+import { getCurrentWeather } from '../../store/selectors';
 
-export default Weather;
+const mapStateToProps = (state) => ({
+  weatherData: getCurrentWeather(state),
+});
+
+export default connect(mapStateToProps)(Weather);

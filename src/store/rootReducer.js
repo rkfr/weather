@@ -1,6 +1,9 @@
 import { ACTION_TYPES } from './actions';
 
+import { formatWeatherResponse } from '../helpers';
+
 const initialState = {
+  locationQuery: '',
   currentWeather: null,
   isLoading: false,
   error: null,
@@ -12,7 +15,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         error: null,
-        currentWeather: action.weather,
+        currentWeather: formatWeatherResponse(action.weather),
       };
     }
 
@@ -20,6 +23,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.error,
+        currentWeather: null,
       };
     }
 
@@ -35,6 +39,13 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         isLoading: false,
+      };
+    }
+
+    case ACTION_TYPES.SET_LOCATION_QUERY: {
+      return {
+        ...state,
+        locationQuery: action.query,
       };
     }
 

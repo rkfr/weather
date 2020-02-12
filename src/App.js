@@ -3,14 +3,14 @@ import './App.scss';
 
 import { Switch, Route } from 'react-router-dom';
 import InitialPageComponent from './components/InitialPageComponent';
-// import Weather from './components/Weather';
+import Weather from './components/Weather';
 
 const App = () => (
   <div className="app">
     <Switch>
-      {/* <Route path="/weather/:id">
+      <Route path="/weather/:id">
         <Weather />
-      </Route> */}
+      </Route>
       <Route path="/">
         <InitialPageComponent />
       </Route>

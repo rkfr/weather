@@ -11,7 +11,6 @@ export const Input = ({
   onSubmit,
   defaultInputVisibility,
   className,
-  isError,
   errorMessage,
 }) => {
   const [isFocused, setFocus] = useState(false);
@@ -25,6 +24,13 @@ export const Input = ({
   const handleBlur = () => setFocus(false);
 
   const handleinputVisibility = () => setInputVisibility(true);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    onSubmit();
+  };
+
+  const isError = !!errorMessage;
 
   const containerClass = classNames('control', {
     [className]: className,
@@ -70,7 +76,7 @@ export const Input = ({
       >
 
         <p className={labelClass}>Choose city...</p>
-        <form onSubmit={onSubmit} className="control__form">
+        <form onSubmit={handleSubmit} className="control__form">
           <input
             type="text"
             name="name"
@@ -100,7 +106,6 @@ Input.propTypes = {
   className: PropTypes.string,
   errorMessage: PropTypes.string,
   defaultInputVisibility: PropTypes.bool,
-  isError: PropTypes.bool,
   onSubmit: PropTypes.func,
 };
 
@@ -110,6 +115,5 @@ Input.defaultProps = {
   className: '',
   errorMessage: '',
   defaultInputVisibility: true,
-  isError: false,
   onSubmit: () => {},
 };

@@ -136,10 +136,7 @@
   }
 
   &__error {
-    position: absolute;
-    transform: translate(0, 26px);
-
-    padding: 3px 15px;
+    transform: translate(0, 17px);
 
     color: $color-error;
     

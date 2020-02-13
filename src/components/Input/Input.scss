@@ -4,10 +4,11 @@
   height: 80px;
   position: relative;
   padding-top: 30px;
+  display: flex;
+  align-items: end;
 
   &__caption {
-    position: absolute;
-    right: 60px;
+    margin-right: 1rem;
   }
 
   &__form {
@@ -33,12 +34,11 @@
   }
 
   &__input-wrapper {
-    transform: scaleX(0);
-    transition: transform 1s;
+    width: 100%;
     order: 1;
-
+    
     &--visible {
-      transform: scaleX(1);
+      animation: slideIn 0.3s;
     }
   }
 
@@ -147,5 +147,16 @@
     &::first-letter {
       text-transform: uppercase;
     }
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+  to {
+    opacity: 1;
+    transform: scaleX(1);
   }
 }

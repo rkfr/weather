@@ -1,10 +1,11 @@
 import { ACTION_TYPES } from './actions';
 
-import { formatWeatherResponse } from '../helpers';
+import { formatWeatherResponse, formatForecastResponse } from '../helpers';
 
 const initialState = {
   locationQuery: '',
   currentWeather: null,
+  forecast: null,
   isLoading: false,
   error: null,
 };
@@ -19,11 +20,18 @@ const rootReducer = (state = initialState, action) => {
       };
     }
 
+    case ACTION_TYPES.SAVE_CURRENT_FORECAST: {
+      return {
+        ...state,
+        error: null,
+        forecast: formatForecastResponse(action.forecast),
+      };
+    }
+
     case ACTION_TYPES.SET_WEATHER_LOADING_ERROR: {
       return {
         ...state,
         error: action.error,
-        currentWeather: null,
       };
     }
 

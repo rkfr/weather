@@ -1,10 +1,24 @@
 
 import { connect } from 'react-redux';
 import Weather from './Weather';
-import { getCurrentWeather } from '../../store/selectors';
+import {
+  getLocationQuery,
+  getCurrentWeather,
+  getLoading,
+  getError,
+} from '../../store/selectors';
+import { loadCurrentWeather, setLocationQuery } from '../../store/actions';
 
 const mapStateToProps = (state) => ({
   weatherData: getCurrentWeather(state),
+  locationQuery: getLocationQuery(state),
+  isLoading: getLoading(state),
+  error: getError(state),
 });
 
-export default connect(mapStateToProps)(Weather);
+const mapDispatchToProps = (dispatch) => ({
+  loadWeather: (locationName) => dispatch(loadCurrentWeather(locationName)),
+  changeLocationQuery: (query) => dispatch(setLocationQuery(query)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Weather);

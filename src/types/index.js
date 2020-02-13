@@ -13,6 +13,7 @@ export const currentWeatherType = {
     tempMin: PropTypes.number,
     tempMax: PropTypes.number,
     windSpeed: PropTypes.number,
+    humidity: PropTypes.number,
     icon: PropTypes.string,
   }),
   error: PropTypes.string,

@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const getHours = (hours) => (Number(hours) < 10 ? `0${hours}` : String(hours));
 
 const to24 = (period, hours) => (period === 'PM' ? Number(hours) + 12 : hours);
@@ -16,15 +17,18 @@ const getTimeFromUnixMs = (ms) => {
 
 export const formatWeatherResponse = (weatherData) => {
   const {
-    // eslint-disable-next-line camelcase
-    main: { temp, temp_min, temp_max },
+    main: {
+      temp, temp_min, temp_max, humidity,
+    },
     weather: weatherArray,
     wind,
     sys,
     name: locationName,
   } = weatherData;
 
-  const { main: weatherState, description, icon } = weatherArray[0];
+  const {
+    main: weatherState, description, icon,
+  } = weatherArray[0];
   const { country, sunrise: sunriseMs, sunset: sunsetMs } = sys;
 
   return {
@@ -38,6 +42,29 @@ export const formatWeatherResponse = (weatherData) => {
     tempMin: kelvinToCelsius(temp_min),
     tempMax: kelvinToCelsius(temp_max),
     windSpeed: wind.speed || 0,
+    humidity,
     icon,
   };
+};
+
+export const formatForecastResponse = (forecast) => {
+  const { list } = forecast;
+
+
+  const formattedList = list.slice(0, 7).map(({
+    dt, main, weather, dt_txt,
+  }) => {
+    const time = dt_txt.split(' ')[1].slice(0, 5);
+    const { temp } = main;
+    const { description } = weather[0];
+
+    return {
+      dt,
+      time,
+      temperature: kelvinToCelsius(temp),
+      description,
+    };
+  });
+
+  return formattedList;
 };

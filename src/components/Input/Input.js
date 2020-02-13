@@ -52,7 +52,7 @@ export const Input = ({
 
   return (
     <div className={containerClass}>
-      {!isinputVisible && !defaultInputVisibility && (
+      {(!isinputVisible && !defaultInputVisibility) ? (
         <>
           <p className="control__caption">{caption}</p>
           <button
@@ -61,40 +61,42 @@ export const Input = ({
             onClick={handleinputVisibility}
           >
             <img
-              src="./images/search.svg"
+              src="/images/search.svg"
               alt="Search icon"
               className="control__img"
             />
           </button>
         </>
+      ) : (
+        <div
+          className={inputWrapperClass}
+          onClick={focus}
+          role="presentation"
+        >
+
+          <p className={labelClass}>Choose city...</p>
+          <form onSubmit={handleSubmit} className="control__form">
+            <input
+              type="text"
+              name="name"
+              value={value}
+              ref={inputRef}
+              onChange={onChange}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              className={inputClass}
+            />
+            <button type="submit" className="control__search-button">
+              Search
+            </button>
+          </form>
+          {isError && (
+          <p className="control__error">{errorMessage}</p>
+          )}
+        </div>
       )}
 
-      <div
-        className={inputWrapperClass}
-        onClick={focus}
-        role="presentation"
-      >
 
-        <p className={labelClass}>Choose city...</p>
-        <form onSubmit={handleSubmit} className="control__form">
-          <input
-            type="text"
-            name="name"
-            value={value}
-            ref={inputRef}
-            onChange={onChange}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            className={inputClass}
-          />
-          <button type="submit" className="control__search-button">
-            Search
-          </button>
-        </form>
-        {isError && (
-        <p className="control__error">{errorMessage}</p>
-        )}
-      </div>
     </div>
   );
 };

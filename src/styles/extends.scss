@@ -9,6 +9,12 @@
   align-items: center;
 }
 
+%flex-space-beetween-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 %position-zero-fixed {
   position: fixed;
   top: 0;

@@ -1,0 +1,23 @@
+@import '../../styles/utils.scss';
+
+.weather-card {
+  text-align: center;
+
+  background-color: $color-white;
+  padding: 2.7rem 2rem;
+  border-radius: 3px;
+
+  &__time {}
+  
+  &__image {}
+
+  &__temp {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.9rem;
+  }
+
+  &__desc {
+    font-style: italic;
+  }
+}

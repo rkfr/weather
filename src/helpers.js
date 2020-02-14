@@ -5,6 +5,12 @@ const to24 = (period, hours) => (period === 'PM' ? Number(hours) + 12 : hours);
 
 const kelvinToCelsius = (k) => (k ? Math.ceil(k - 273.15) : 0);
 
+export const getDateFromUnixMs = (ms) => {
+  const date = String(new Date(ms * 1000)).split(' ');
+  const [dayOfWeek, month, number] = date;
+  return `${dayOfWeek}, ${number} ${month}`;
+};
+
 const getTimeFromUnixMs = (ms) => {
   const date = new Date(ms * 1000);
   const time = date.toLocaleTimeString().split(':');
@@ -51,16 +57,17 @@ export const formatForecastResponse = (forecast) => {
   const { list } = forecast;
 
 
-  const formattedList = list.slice(0, 7).map(({
+  const formattedList = list.map(({
     dt, main, weather, dt_txt,
   }) => {
     const time = dt_txt.split(' ')[1].slice(0, 5);
     const { temp } = main;
-    const { description } = weather[0];
+    const { description, icon } = weather[0];
 
     return {
       dt,
       time,
+      icon,
       temperature: kelvinToCelsius(temp),
       description,
     };

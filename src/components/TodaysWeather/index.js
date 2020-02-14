@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 import TodaysWeather from './TodaysWeather';
-import { getForecast } from '../../store/selectors';
+import { getForecastForToday } from '../../store/selectors';
 
 const mapStateToProps = (state) => ({
-  forecast: getForecast(state),
+  forecast: getForecastForToday(state),
 });
 
 export default connect(mapStateToProps)(TodaysWeather);

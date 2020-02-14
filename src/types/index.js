@@ -8,6 +8,13 @@ export const forecastWeatherType = PropTypes.shape({
   description: PropTypes.string,
 });
 
+export const forecastByDaysType = PropTypes.arrayOf(
+  PropTypes.shape({
+    date: PropTypes.string,
+    weather: PropTypes.arrayOf(forecastWeatherType),
+  }),
+);
+
 export const forecastType = PropTypes.arrayOf(forecastWeatherType);
 
 export const currentWeatherType = PropTypes.shape({

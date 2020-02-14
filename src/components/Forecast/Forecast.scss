@@ -1,0 +1,13 @@
+@import '../../styles/utils.scss';
+
+.forecast {
+
+  &__back-button {
+    color: $color-link;
+    cursor: pointer;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

@@ -1,7 +1,7 @@
 @import '../../styles/utils.scss';
 
 .weather {
-  padding-top: 12vh;
+  padding-top: 10vh;
 
   color: $color-white;
 
@@ -24,6 +24,7 @@
 .current-weather {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 8rem;
 
   &__temperature {
     flex-basis: 50%;

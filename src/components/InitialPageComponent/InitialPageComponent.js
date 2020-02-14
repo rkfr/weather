@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './InitialPageComponent.scss';
 
 import { Input } from '../Input';
 import { Loader } from '../Loader';
 
-import { currentWeatherType, currentWeatherTypeDefault } from '../../types';
+import { currentWeatherType } from '../../types';
 
 const InitialPageComponent = (props) => {
   const {
@@ -59,8 +60,23 @@ const InitialPageComponent = (props) => {
   );
 };
 
-InitialPageComponent.propTypes = currentWeatherType;
+InitialPageComponent.propTypes = {
+  isLoading: PropTypes.bool,
+  weatherData: currentWeatherType,
+  loadWeather: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  locationQuery: PropTypes.string,
+  changeLocationQuery: PropTypes.func,
+  loadWeatherByGeolocation: PropTypes.func,
+};
 
-InitialPageComponent.defaultProps = currentWeatherTypeDefault;
+InitialPageComponent.defaultProps = {
+  isLoading: false,
+  weatherData: [],
+  error: '',
+  locationQuery: '',
+  changeLocationQuery: () => {},
+  loadWeatherByGeolocation: () => {},
+};
 
 export default InitialPageComponent;

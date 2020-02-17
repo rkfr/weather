@@ -139,6 +139,7 @@ const Weather = (props) => {
             linkText="Show forecast for 5 days"
             title="Todays weather"
             forecast={forecast}
+            defaultDetailsVisibility
           />
         </>
       )}

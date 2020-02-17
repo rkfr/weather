@@ -6,6 +6,8 @@ import {
   getLocation,
 } from '../api';
 
+import { formatWeatherResponse, formatForecastResponse } from '../helpers';
+
 export const ACTION_TYPES = {
   SAVE_CURRENT_WEATHER: 'SAVE_CURRENT_WEATHER',
   SAVE_CURRENT_FORECAST: 'SAVE_CURRENT_FORECAST',
@@ -13,6 +15,7 @@ export const ACTION_TYPES = {
   START_LOADING: 'START_LOADING',
   STOP_LOADING: 'STOP_LOADING',
   SET_LOCATION_QUERY: 'SET_LOCATION_QUERY',
+  SAVE_TO_HISTORY: 'ADD_TO_QUERY_HISTORY',
 };
 
 const saveCurrentWeather = (weather) => ({
@@ -38,10 +41,16 @@ const stopLoading = () => ({
   type: ACTION_TYPES.STOP_LOADING,
 });
 
+const saveToHistory = (queryData) => ({
+  type: ACTION_TYPES.SAVE_TO_HISTORY,
+  queryData,
+});
+
 export const setLocationQuery = (query) => ({
   type: ACTION_TYPES.SET_LOCATION_QUERY,
   query,
 });
+
 
 export const loadCurrentWeatherByGeolocation = () => (dispatch) => getLocation()
   .then(({ latitude, longitude }) => {
@@ -53,15 +62,32 @@ export const loadCurrentWeatherByGeolocation = () => (dispatch) => getLocation()
     ]);
   })
   .then(([currentWeather, weatherForecast]) => {
-    dispatch(saveCurrentWeather(currentWeather));
-    dispatch(saveCurrentForecast(weatherForecast));
+    dispatch(saveCurrentWeather(
+      formatWeatherResponse(currentWeather),
+    ));
+    dispatch(saveCurrentForecast(
+      formatForecastResponse(weatherForecast),
+    ));
   })
   .catch(() => dispatch(setWeatherLoadingError('User denied access to geolocation')))
   .finally(() => dispatch(stopLoading()));
 
-export const loadCurrentWeather = (locationName) => (dispatch) => {
+export const loadCurrentWeather = (locationName) => (dispatch, getState) => {
+  const { locationQuery, history } = getState();
+  const dataFromhistory = history.find(({ location }) => location === locationQuery.toLowerCase());
+
+  if (dataFromhistory) {
+    const { weather, forecast } = dataFromhistory;
+
+    dispatch(saveCurrentWeather(weather));
+    dispatch(saveCurrentForecast(forecast));
+
+    return;
+  }
+
   dispatch(startLoading());
 
+  // eslint-disable-next-line consistent-return
   return Promise.all([
     loadCurrentWeatherByCityName(locationName),
     loadDailyForecast(locationName),
@@ -71,8 +97,19 @@ export const loadCurrentWeather = (locationName) => (dispatch) => {
         throw new Error();
       }
 
-      dispatch(saveCurrentWeather(currentWeather));
-      dispatch(saveCurrentForecast(weatherForecast));
+      const formattedWeather = formatWeatherResponse(currentWeather);
+      const formattedForecast = formatForecastResponse(weatherForecast);
+
+      const historyData = {
+        location: formattedWeather.locationName.toLowerCase(),
+        weather: formattedWeather,
+        forecast: formattedForecast,
+      };
+
+      dispatch(saveCurrentWeather(formattedWeather));
+      dispatch(saveCurrentForecast(formattedForecast));
+
+      dispatch(saveToHistory(historyData));
     })
     .catch(() => dispatch(setWeatherLoadingError('Location not found')))
     .finally(() => dispatch(stopLoading()));

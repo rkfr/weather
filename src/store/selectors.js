@@ -10,7 +10,7 @@ export const getLoading = (state) => state.isLoading;
 export const getLocationQuery = (state) => state.locationQuery;
 
 export const getForecastByDays = (state) => {
-  const { forecast } = state;
+  const forecast = state.forecast || [];
 
   const days = [];
   let day = [];

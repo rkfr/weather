@@ -24,7 +24,6 @@ const Forecast = ({ forecast }) => {
         >
           &#8592; Back
         </button>
-        <br />
 
         {forecast.map(({ date, weather }) => (
           <ForecastList

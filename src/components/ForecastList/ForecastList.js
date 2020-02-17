@@ -1,18 +1,28 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './ForecastList.scss';
 
+import { Link } from 'react-router-dom';
+import { forecastType } from '../../types';
 import WeatherCard from '../WeatherCard';
 
 const ForecastList = (props) => {
-  const { title, link, forecast } = props;
+  const {
+    title, url, linkText, forecast,
+  } = props;
 
   return (
     <div className="forecast-list">
-      <section className="todays-weather">
-        <div className="todays-weather__main">
-          <h2 className="todays-weather__title">{title}</h2>
-          {link && (
-            link()
+      <section>
+        <div className="forecast-list__main">
+          <h2 className="forecast-list__title">{title}</h2>
+          {url && (
+            <Link
+              className="forecast-list__link"
+              to={url}
+            >
+              {linkText}
+            </Link>
           )}
 
         </div>
@@ -25,6 +35,20 @@ const ForecastList = (props) => {
       </section>
     </div>
   );
+};
+
+ForecastList.propTypes = {
+  title: PropTypes.string,
+  url: PropTypes.string,
+  linkText: PropTypes.string,
+  forecast: forecastType,
+};
+
+ForecastList.defaultProps = {
+  title: '',
+  url: '',
+  linkText: '',
+  forecast: [],
 };
 
 export default ForecastList;

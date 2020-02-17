@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import './Weather.scss';
 import { useParams, useHistory } from 'react-router-dom';
-import { currentWeatherType } from '../../types';
+import { currentWeatherType, forecastType } from '../../types';
 
 import { Loader } from '../Loader';
 import { Input } from '../Input';
-import TodaysWeather from '../TodaysWeather';
+import ForecastList from '../ForecastList';
 
 const Weather = (props) => {
   const { id } = useParams();
@@ -16,6 +16,7 @@ const Weather = (props) => {
     locationQuery,
     changeLocationQuery,
     isLoading,
+    forecast,
     error,
   } = props;
 
@@ -37,7 +38,7 @@ const Weather = (props) => {
   };
 
   return (
-    <div className="content">
+    <div className="content weather-wrapper">
       {isLoading && (
         <Loader />
       )}
@@ -83,7 +84,7 @@ const Weather = (props) => {
               <div className="current-weather__details">
                 <div className="current-weather__details-item details-item">
                   <p className="details-item__title details-item__temp">
-                    {weatherData.tempMax}
+                    {`${weatherData.tempMax} C`}
                   </p>
                   <p className="details-item__text">
                     High
@@ -107,7 +108,7 @@ const Weather = (props) => {
                 </div>
                 <div className="current-weather__details-item details-item">
                   <p className="details-item__title details-item__temp">
-                    {weatherData.tempMin}
+                    {`${weatherData.tempMin} C`}
                   </p>
                   <p className="details-item__text">
                     Low
@@ -133,7 +134,12 @@ const Weather = (props) => {
             </div>
           </main>
 
-          <TodaysWeather />
+          <ForecastList
+            url={`/forecast/${id}`}
+            linkText="Show forecast for 5 days"
+            title="Todays weather"
+            forecast={forecast}
+          />
         </>
       )}
     </div>
@@ -144,6 +150,7 @@ const Weather = (props) => {
 Weather.propTypes = {
   isLoading: PropTypes.bool,
   weatherData: currentWeatherType,
+  forecast: forecastType,
   loadWeather: PropTypes.func.isRequired,
   error: PropTypes.string,
   locationQuery: PropTypes.string,
@@ -153,6 +160,7 @@ Weather.propTypes = {
 Weather.defaultProps = {
   isLoading: false,
   weatherData: [],
+  forecast: [],
   error: '',
   locationQuery: '',
   changeLocationQuery: () => {},

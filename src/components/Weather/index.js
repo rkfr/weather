@@ -6,11 +6,13 @@ import {
   getCurrentWeather,
   getLoading,
   getError,
+  getForecastForToday,
 } from '../../store/selectors';
 import { loadCurrentWeather, setLocationQuery } from '../../store/actions';
 
 const mapStateToProps = (state) => ({
   weatherData: getCurrentWeather(state),
+  forecast: getForecastForToday(state),
   locationQuery: getLocationQuery(state),
   isLoading: getLoading(state),
   error: getError(state),

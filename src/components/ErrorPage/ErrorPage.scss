@@ -1,0 +1,24 @@
+@import '../../styles/utils.scss';
+
+.error {
+  padding-top: 10rem;
+  text-align: center;
+
+  &__message {
+    font-size: 1.3rem;
+    color: $color-error;
+    margin-bottom: 3rem;
+  }
+
+  &__link {
+    font-size: 1.2rem;
+    color: $color-link;
+    border-bottom: 1px solid $color-link;
+    transition: 150ms all ease-out;
+
+    &:hover {
+      color: $color-dark-grey;
+      border-bottom: 1px solid $color-dark-grey;
+    }
+  }
+}

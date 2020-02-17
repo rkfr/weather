@@ -7,11 +7,7 @@ import { historyType } from '../../types';
 const History = ({ history, setWeather }) => {
   const historyToshow = history.slice(-5);
 
-  console.log(historyToshow);
-
-
   return (
-
     <div className="history">
       {history.length && (
         historyToshow.map(({ location, weather, forecast }, i) => (

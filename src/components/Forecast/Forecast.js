@@ -1,6 +1,6 @@
 import React from 'react';
 import './Forecast.scss';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 
 import { forecastByDaysType } from '../../types';
 
@@ -25,13 +25,18 @@ const Forecast = ({ forecast }) => {
           &#8592; Back
         </button>
 
-        {forecast.map(({ date, weather }) => (
-          <ForecastList
-            key={date}
-            title={date}
-            forecast={weather}
-          />
-        ))}
+        {forecast.length ? (
+          forecast.map(({ date, weather }) => (
+            <ForecastList
+              key={date}
+              title={date}
+              forecast={weather}
+            />
+          ))
+        ) : (
+          <Redirect to="/404" />
+        )}
+
 
       </div>
     </div>

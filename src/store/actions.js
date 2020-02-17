@@ -18,12 +18,12 @@ export const ACTION_TYPES = {
   SAVE_TO_HISTORY: 'ADD_TO_QUERY_HISTORY',
 };
 
-const saveCurrentWeather = (weather) => ({
+export const saveCurrentWeather = (weather) => ({
   type: ACTION_TYPES.SAVE_CURRENT_WEATHER,
   weather,
 });
 
-const saveCurrentForecast = (forecast) => ({
+export const saveCurrentForecast = (forecast) => ({
   type: ACTION_TYPES.SAVE_CURRENT_FORECAST,
   forecast,
 });
@@ -74,10 +74,10 @@ export const loadCurrentWeatherByGeolocation = () => (dispatch) => getLocation()
 
 export const loadCurrentWeather = (locationName) => (dispatch, getState) => {
   const { locationQuery, history } = getState();
-  const dataFromhistory = history.find(({ location }) => location === locationQuery.toLowerCase());
+  const dataFromHistory = history.find(({ location }) => location === locationQuery.toLowerCase());
 
-  if (dataFromhistory) {
-    const { weather, forecast } = dataFromhistory;
+  if (dataFromHistory) {
+    const { weather, forecast } = dataFromHistory;
 
     dispatch(saveCurrentWeather(weather));
     dispatch(saveCurrentForecast(forecast));

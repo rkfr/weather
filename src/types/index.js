@@ -31,3 +31,11 @@ export const currentWeatherType = PropTypes.shape({
   humidity: PropTypes.number,
   icon: PropTypes.string,
 });
+
+export const historyType = PropTypes.arrayOf(
+  PropTypes.shape({
+    location: PropTypes.string,
+    weather: currentWeatherType,
+    forecast: forecastType,
+  }),
+);

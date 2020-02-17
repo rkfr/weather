@@ -5,10 +5,11 @@
   position: relative;
   padding-top: 30px;
   display: flex;
-  align-items: end;
+  align-items: center;
 
   &__caption {
     margin-right: 1rem;
+    color: $color-dark-grey;
   }
 
   &__form {

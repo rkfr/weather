@@ -57,12 +57,22 @@ const rootReducer = (state = initialState, action) => {
     }
 
     case ACTION_TYPES.SAVE_TO_HISTORY: {
+      const { queryData } = action;
+      const { location } = queryData;
+      const { history } = state;
+
+      const updatedHistory = [
+        ...history,
+      ];
+
+
+      if (!history.includes(location)) {
+        updatedHistory.push(queryData);
+      }
+
       return {
         ...state,
-        history: [
-          ...state.history,
-          action.queryData,
-        ],
+        history: updatedHistory,
         error: null,
       };
     }

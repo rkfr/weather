@@ -28,3 +28,9 @@ export const getForecastByDays = (state) => {
 };
 
 export const getForecastForToday = ({ forecast = [] }) => ((forecast) ? forecast.slice(0, 7) : []);
+
+export const getLocationFromHistoryRequests = (state) => (
+  state.history.map(({ location }) => location)
+);
+
+export const getHistory = (state) => state.history;

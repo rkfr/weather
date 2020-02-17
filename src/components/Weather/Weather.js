@@ -7,6 +7,7 @@ import { currentWeatherType, forecastType } from '../../types';
 import { Loader } from '../Loader';
 import { Input } from '../Input';
 import ForecastList from '../ForecastList';
+import History from '../History';
 
 const Weather = (props) => {
   const { id } = useParams();
@@ -54,14 +55,18 @@ const Weather = (props) => {
                 </h1>
                 <p className="weather__date">Monday, 2 February</p>
               </div>
-              <Input
-                caption="Find..."
-                value={locationQuery}
-                errorMessage={error}
-                defaultInputVisibility={false}
-                onChange={onLocationQueryChange}
-                onSubmit={onSubmitWeather}
-              />
+              <div>
+                <Input
+                  caption="Find..."
+                  value={locationQuery}
+                  errorMessage={error}
+                  defaultInputVisibility={false}
+                  onChange={onLocationQueryChange}
+                  onSubmit={onSubmitWeather}
+                />
+                {!error && <History />}
+              </div>
+
 
             </div>
 

@@ -8,7 +8,3 @@ const store = createStore(
 );
 
 export default store;
-
-store.subscribe(() => {
-  console.log(store.getState());
-});

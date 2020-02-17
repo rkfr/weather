@@ -75,3 +75,7 @@ export const formatForecastResponse = (forecast) => {
 
   return formattedList;
 };
+
+export const getAverageTemp = (forecast = []) => (
+  (forecast.reduce((avg, { temperature }) => temperature + avg, 0) / forecast.length).toFixed(1)
+);

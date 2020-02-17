@@ -1,3 +1,6 @@
+import React from 'react';
 import ForecastList from './ForecastList';
 
-export default ForecastList;
+const MemorizedForecastList = React.memo(ForecastList);
+
+export default MemorizedForecastList;

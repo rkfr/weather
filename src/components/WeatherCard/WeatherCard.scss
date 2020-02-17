@@ -6,8 +6,10 @@
   background-color: $color-white;
   padding: 1.2rem 0;
   border-radius: 3px;
+  
   flex-basis: 11%;
   min-height: 232px;
+  min-width: 140px;
 
   &__temp {
     font-size: 1.1rem;
@@ -17,5 +19,15 @@
 
   &__desc {
     font-style: italic;
+  }
+
+  @media (max-width: $break-point-desktop) {
+    margin-bottom: 1.5rem;
+    min-width: 200px;
+  }
+
+  @media (max-width: $break-point-tablet-sm) {
+    flex-basis: 46%;
+    min-width: auto;
   }
 }

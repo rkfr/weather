@@ -12,6 +12,10 @@
   &__title {
     font-size: 1.5rem;
     color: #fff;
+
+    @media (max-width: $break-point-tablet) {
+      font-size: 1.3rem;
+    }
   }
 
   &__avg-temp {
@@ -26,6 +30,10 @@
     &:hover {
       text-decoration: underline;
     }
+
+    @media (max-width: $break-point-tablet) {
+      font-size: 1.1rem;
+    }
   }
 }
 
@@ -33,6 +41,10 @@
 
 .weather-cards {
   @extend %flex-space-beetween-center;
+
+  @media (max-width: $break-point-desktop) {
+    flex-wrap: wrap;
+  }
 }
 
 .temp {

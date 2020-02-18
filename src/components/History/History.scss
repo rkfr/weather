@@ -2,10 +2,24 @@
 
 .history {
 
+  @media (max-width: $break-point-phone-lg) {
+    flex-wrap: wrap;
+  }
+
+  &__caption {
+    display: block;
+    padding-top: 5px;
+    color: $color-grey;
+  }
+
   &__link {
     display: inline-block;
     color: $color-link;
     padding: 3px 6px;
+
+    &::first-letter {
+      text-transform: uppercase;
+    }
 
     &:hover {
       text-decoration: underline;

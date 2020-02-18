@@ -6,23 +6,29 @@ import { historyType } from '../../types';
 
 const History = ({ history, setWeather }) => {
   const historyToshow = history.slice(-5);
+  const len = historyToshow.length;
 
   return (
     <div className="history">
-      {history.length && (
-        historyToshow.map(({ location, weather, forecast }, i) => (
-          <Link
-            key={location}
-            onClick={() => setWeather(weather, forecast)}
-            className="history__link"
-            to={`/weather/${location}`}
-          >
-            {location}
-            {(i !== (historyToshow.length - 1)) && (
-            <span>, </span>
-            )}
-          </Link>
-        ))
+      {(len > 1) && (
+        <>
+          <span className="history__caption">
+            Recent requests:
+          </span>
+          {historyToshow.map(({ location, weather, forecast }, i) => (
+            <Link
+              key={location}
+              onClick={() => setWeather(weather, forecast)}
+              className="history__link"
+              to={`/weather/${location}`}
+            >
+              {location}
+              {(i !== (len - 1)) && (
+              <span>, </span>
+              )}
+            </Link>
+          ))}
+        </>
       )}
     </div>
   );

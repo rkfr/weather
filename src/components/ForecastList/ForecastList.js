@@ -19,7 +19,7 @@ const ForecastList = (props) => {
     <div className="forecast-list">
       <section>
         <div className="forecast-list__main">
-          <div>
+          <div className="forecast-list__title-wrapper">
             <h2 className="forecast-list__title">{title}</h2>
             <p className="forecast-list__avg-temp">
               Average temperature:

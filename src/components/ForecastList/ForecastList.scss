@@ -3,10 +3,24 @@
 .forecast-list {
   margin-bottom: 5rem;
 
+  @media (max-width: $break-point-phone-lg) {
+    margin-bottom: 0;
+  }
+
   &__main {
     @extend %flex-space-beetween-center;
     
     margin-bottom: 2rem;
+
+    @media (max-width: $break-point-phone-lg) {
+      display: block;
+    }
+  }
+
+  &__title-wrapper {
+    @media (max-width: $break-point-phone-lg) {
+      margin-bottom: 1.2rem;
+    }
   }
 
   &__title {

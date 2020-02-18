@@ -9,8 +9,9 @@
 
   &__back-button {
     color: $color-link;
-    cursor: pointer;
     margin-bottom: 2rem;
+    font-size: 1.3rem;
+    cursor: pointer;
 
     &:hover {
       text-decoration: underline;

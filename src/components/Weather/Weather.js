@@ -55,7 +55,7 @@ const Weather = (props) => {
                 </h1>
                 <p className="weather__date">Monday, 2 February</p>
               </div>
-              <div>
+              <div className="weather__search">
                 <Input
                   caption="Find..."
                   value={locationQuery}

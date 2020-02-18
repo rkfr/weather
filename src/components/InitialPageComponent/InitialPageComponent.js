@@ -49,8 +49,12 @@ const InitialPageComponent = (props) => {
           />
           {(weatherData && !error) && (
           <div className="initial-page__location">
-            <span>Show weather forecast for </span>
-            <Link className="initial-page__link" to={`/weather/${weatherData.locationName}`}>{weatherData.locationName}</Link>
+            <Link
+              className="initial-page__link"
+              to={`/weather/${weatherData.locationName}`}
+            >
+              {`Show weather forecast for ${weatherData.locationName}`}
+            </Link>
           </div>
           )}
 

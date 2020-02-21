@@ -77,10 +77,8 @@ export const loadCurrentWeather = (locationName) => (dispatch, getState) => {
   const dataFromHistory = history.find(({ location }) => location === locationQuery.toLowerCase());
 
   if (dataFromHistory) {
-    const { weather, forecast } = dataFromHistory;
-
-    dispatch(saveCurrentWeather(weather));
-    dispatch(saveCurrentForecast(forecast));
+    dispatch(saveCurrentWeather(dataFromHistory.weather));
+    dispatch(saveCurrentForecast(dataFromHistory.forecast));
 
     return;
   }
@@ -95,6 +93,11 @@ export const loadCurrentWeather = (locationName) => (dispatch, getState) => {
     .then(([currentWeather, weatherForecast]) => {
       if (currentWeather.cod === '404') {
         throw new Error();
+      }
+
+      if (history.some(({ location }) => location === currentWeather.name.toLowerCase())) {
+        dispatch(saveCurrentWeather(dataFromHistory.weather));
+        dispatch(saveCurrentForecast(dataFromHistory.forecast));
       }
 
       const formattedWeather = formatWeatherResponse(currentWeather);

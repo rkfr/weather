@@ -1,9 +1,29 @@
 /* eslint-disable camelcase */
+const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const days = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+
 const getHours = (hours) => (Number(hours) < 10 ? `0${hours}` : String(hours));
 
 const to24 = (period, hours) => (period === 'PM' ? Number(hours) + 12 : hours);
 
 const kelvinToCelsius = (k) => (k ? Math.ceil(k - 273.15) : 0);
+
+export const getCurrentDate = () => {
+  const date = new Date();
+  const monthNumber = date.getDate();
+  const month = months[date.getMonth()];
+  const day = days[date.getDay()];
+
+  return `${day}, ${monthNumber} ${month}`;
+};
 
 export const getDateFromUnixMs = (ms) => {
   const date = String(new Date(ms * 1000)).split(' ');

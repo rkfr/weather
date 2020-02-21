@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import './Weather.scss';
 import { useParams, useHistory } from 'react-router-dom';
 import { currentWeatherType, forecastType } from '../../types';
+import { getCurrentDate } from '../../helpers';
 
 import { Loader } from '../Loader';
 import { Input } from '../Input';
@@ -53,7 +54,7 @@ const Weather = (props) => {
                 <h1 className="weather__city-name">
                   {`${weatherData.locationName}, ${weatherData.country}`}
                 </h1>
-                <p className="weather__date">Monday, 2 February</p>
+                <p className="weather__date">{getCurrentDate()}</p>
               </div>
               <div className="weather__search">
                 <Input

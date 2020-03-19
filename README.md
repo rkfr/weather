@@ -9,4 +9,4 @@ Technologies used: react, redux, react-router, openweathermap api.
 - under the input field we can see the last five cities that you looked before and by clicking on them you will see the weather again
 - request to api is going just once for one city in time till the page is reloaded
 
-Open [demo link](https://cryptic-refuge-85909.herokuapp.com/) to view it.
+Open [demo link](https://cryptic-refuge-85909.herokuapp.com/) to view it (keep calm when heroku starts).
